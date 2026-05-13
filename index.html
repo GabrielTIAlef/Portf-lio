@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabriel Álef | Analista de Dados</title>
+
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #151922;
+      --muted: #5f6776;
+      --primary: #1f4ed8;
+      --primary-dark: #173a9a;
+      --soft-blue: #eaf0ff;
+      --border: #e4e7ee;
+      --shadow: 0 18px 45px rgba(18, 38, 63, 0.08);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 248, 251, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+      transition: all 0.25s ease;
+    }
+
+    .brand:hover {
+      color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 8px 2px;
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 2px;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      padding: 72px 0 44px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.3fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, #ffffff, #eef3ff);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 34px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .profile-card img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 8px solid #fff;
+      box-shadow: 0 14px 30px rgba(31, 78, 216, 0.16);
+    }
+
+    .profile-card h1 {
+      margin: 22px 0 6px;
+      font-size: 34px;
+      letter-spacing: -0.05em;
+    }
+
+    .profile-card p {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hero-copy .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--soft-blue);
+      color: var(--primary-dark);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy h2 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+      margin: 0 0 18px;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-copy p {
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0 0 24px;
+      max-width: 760px;
+    }
+
+    .impact-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 28px 0;
+    }
+
+    .impact {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 25px rgba(18, 38, 63, 0.05);
+    }
+
+    .impact strong {
+      display: block;
+      font-size: 26px;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .impact span {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 18px rgba(18, 38, 63, 0.04);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 14px 30px rgba(31, 78, 216, 0.14);
+    }
+
+    .btn.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .btn.primary:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      color: #fff;
+      box-shadow: 0 16px 34px rgba(31, 78, 216, 0.28);
+    }
+
+    .btn:focus-visible,
+    .nav-links a:focus-visible,
+    .brand:focus-visible {
+      outline: 3px solid rgba(31, 78, 216, 0.28);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+
+    section {
+      padding: 44px 0;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      margin: 0;
+      letter-spacing: -0.05em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .stack-card,
+    .education-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 25px rgba(18, 38, 63, 0.05);
+      transition: all 0.25s ease;
+    }
+
+    .stack-card:hover,
+    .education-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(31, 78, 216, 0.28);
+      box-shadow: 0 16px 34px rgba(18, 38, 63, 0.10);
+    }
+
+    .stack-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .stack-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .architecture {
+      background: #101827;
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .architecture h2 {
+      margin-top: 0;
+      font-size: 34px;
+      letter-spacing: -0.05em;
+    }
+
+    .architecture p {
+      color: rgba(255, 255, 255, 0.76);
+      margin-bottom: 28px;
+    }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .flow-item {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 16px;
+      padding: 18px 24px;
+      text-align: center;
+      font-weight: 800;
+      min-width: 150px;
+      transition: all 0.3s ease;
+    }
+
+    .flow-item:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .arrow {
+      font-size: 34px;
+      font-weight: 900;
+      color: #7ea2ff;
+      line-height: 1;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 26px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .project-card.reverse {
+      grid-template-columns: 1.15fr 1fr;
+    }
+
+    .project-card.reverse .project-media {
+      order: 2;
+    }
+
+    .project-media {
+      background: #eef1f7;
+      border-radius: 18px;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 18px;
+    }
+
+    .tag {
+      background: var(--soft-blue);
+      color: var(--primary-dark);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .project-content h3 {
+      font-size: 28px;
+      margin: 0 0 10px;
+      letter-spacing: -0.04em;
+    }
+
+    .project-content p {
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .mini {
+      background: #f8f9fc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .mini strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .mini span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 18px;
+    }
+
+    .education-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .education-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .cert-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .cert-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--muted);
+    }
+
+    .cert-list li::before {
+      content: "✓";
+      color: var(--primary);
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .project-card,
+      .project-card.reverse,
+      .stack-grid,
+      .impact-row,
+      .mini-grid,
+      .education-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card.reverse .project-media {
+        order: 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .profile-card img {
+        width: 180px;
+        height: 180px;
+      }
+
+      .section-title {
+        display: block;
+      }
+
+      .flow {
+        flex-direction: column;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand">Gabriel Álef | Analista de dados</a>
+
+      <nav class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#stack">Ferramentas</a>
+        <a href="#arquitetura">Arquitetura</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#formacao">Formação</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="sobre">
+      <div class="container hero-grid">
+        <div class="profile-card">
+          <img src="imagem_perfil.png" alt="Foto de Gabriel Álef" />
+          <h1>Gabriel Álef</h1>
+          <p>Analista de Dados • BI • Automação</p>
+        </div>
+
+        <div class="hero-copy">
+          <div class="eyebrow">Power BI • Python • SQL • ETL • APIs</div>
+
+          <h2>Transformo dados operacionais em decisões claras e processos automatizados</h2>
+
+          <p>
+            Sou Analista de Dados, formado em Análise e Desenvolvimento de Sistemas.
+            Trabalho com BI, automação e integração de sistemas, construindo pipelines
+            com ferramentas como Gestta, Notion, Onvio e Conta Azul utilizando
+            Python, SQL, PostgreSQL e Power BI. Gerando valor com dados e trazendo auxílio na tomada de decisão.
+          </p>
+
+          <div class="impact-row">
+            <div class="impact">
+              <strong>70%</strong>
+              <span>de redução no tempo de atualização de relatórios</span>
+            </div>
+
+            <div class="impact">
+              <strong>5 dias</strong>
+              <span>de trabalho manual eliminados por rotinas recorrentes</span>
+            </div>
+
+            <div class="impact">
+              <strong>360º</strong>
+              <span>visão integrada da operação, financeiro e atendimento</span>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <a class="btn primary" href="#projetos">Ver projetos</a>
+            <a class="btn" href="https://github.com/GabrielTIAlef" target="_blank">GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/gabrielalef/" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="container">
+        <div class="section-title">
+          <h2>Principais ferramentas</h2>
+          <p>Ferramentas que utilizo para criar pipelines, automações, BDs e dashboards executivos.</p>
+        </div>
+
+        <div class="stack-grid">
+          <div class="stack-card">
+            <strong>Python</strong>
+            <span>Pandas, SQLAlchemy, Requests, Selenium</span>
+          </div>
+
+          <div class="stack-card">
+            <strong>Banco de Dados</strong>
+            <span>PostgreSQL, MySQL, views</span>
+          </div>
+
+          <div class="stack-card">
+            <strong>Power BI</strong>
+            <span>DAX, Power Query, modelagem e storytelling</span>
+          </div>
+
+          <div class="stack-card">
+            <strong>Integrações</strong>
+            <span>APIs, RPA e pipelines de dados</span>
+          </div>
+
+          <div class="stack-card">
+            <strong>Análises</strong>
+            <span>KPIs, tomada de decisão e análise operacional</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="arquitetura">
+      <div class="container">
+        <div class="architecture">
+          <h2>Arquitetura dos projetos</h2>
+
+          <p>
+            Estrutura aplicada nos projetos transformando sistemas operacionais
+            em inteligência de negócio.
+          </p>
+
+          <div class="flow">
+            <div class="flow-item">APIs / Sistemas</div>
+            <div class="arrow">→</div>
+
+            <div class="flow-item">Python ETL</div>
+            <div class="arrow">→</div>
+
+            <div class="flow-item">PostgreSQL</div>
+            <div class="arrow">→</div>
+
+            <div class="flow-item">Power BI</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <div class="container">
+        <div class="section-title">
+          <h2>Projetos em destaque</h2>
+          <p>
+            Projetos reais e analíticos com foco em BI,
+            integração de sistemas e estratégia de negócio. Todos os painéis
+            possuem link interativo e os códigos dos projetos estão disponíveis
+            no GitHub.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-media">
+              <img src="pbi_gestao_geral.png" alt="Painel Gestão Geral" />
+            </div>
+
+            <div class="project-content">
+              <h3>Painel Gestão Geral</h3>
+
+              <p>
+                Solução completa de BI e automação contábil para acompanhamento
+                em tempo real dos processos da empresa, integrando Gestta,
+                Notion, Conta Azul, PostgreSQL e Power BI.
+              </p>
+
+              <div class="tag-row">
+                <span class="tag">Projeto real</span>
+                <span class="tag">Python</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Power BI</span>
+                <span class="tag">APIs</span>
+              </div>
+
+              <div class="mini-grid">
+                <div class="mini">
+                  <strong>Problema</strong>
+                  <span>dados espalhados entre ferramentas e baixa visibilidade operacional</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Solução</strong>
+                  <span>pipeline integrado com atualização automática e views para gerenciamento e tomada de decisão</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Impacto</strong>
+                  <span>gestão de produtividade, gargalos, inadimplência e fechamento</span>
+                </div>
+              </div>
+
+              <a class="btn primary" href="https://app.powerbi.com/view?r=eyJrIjoiMWY4ZjZjMzItYzE4MS00OWJkLWI3MDgtZDdlZmNjYzk2NjI2IiwidCI6ImM0ZTEzMGM1LTcxODctNDk3Zi05M2JiLTEwZGRhYWYyMDUwYyJ9" target="_blank">
+                Abrir painel
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reverse">
+            <div class="project-media">
+              <img src="pbi_financeiro.png" alt="Painel Financeiro" />
+            </div>
+
+            <div class="project-content">
+              <h3>Painel Financeiro</h3>
+
+              <p>
+                Projeto para acompanhamento da performance financeira, controle
+                de custos, rentabilidade, realizado x orçado, inadimplência e
+                análise temporal de resultados.
+              </p>
+
+              <div class="tag-row">
+                <span class="tag">Financeiro</span>
+                <span class="tag">ETL</span>
+                <span class="tag">DAX</span>
+                <span class="tag">Power Query</span>
+                <span class="tag">PostgreSQL</span>
+              </div>
+
+              <div class="mini-grid">
+                <div class="mini">
+                  <strong>Problema</strong>
+                  <span>necessidade de visão consolidada da saúde financeira</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Solução</strong>
+                  <span>painéis executivo e operacional com KPIs de gestão</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Impacto</strong>
+                  <span>apoio à tomada de decisão, precificação e controle financeiro</span>
+                </div>
+              </div>
+
+              <a class="btn primary" href="https://app.powerbi.com/view?r=eyJrIjoiYTg2YTRhMjItMjM1Yi00NGY5LWFlZTktMDRjNmZkZGVlYjVhIiwidCI6IjdlNWQzNzVhLWYyNDMtNDQ3NS1iNmJmLTQzMTI5OWYwYWFhOSJ9" target="_blank">
+                Abrir painel
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <img src="pbi_pcsti.png" alt="Painel PCSTI 2024" />
+            </div>
+
+            <div class="project-content">
+              <h3>Painel PCSTI 2024</h3>
+
+              <p>
+                Painel desenvolvido durante estágio no TRF para apoiar a análise
+                de contratações, valores aprovados, recorrência e distribuição
+                mensal com base em dados estruturados em Excel.
+              </p>
+
+              <div class="tag-row">
+                <span class="tag">Projeto institucional</span>
+                <span class="tag">Power BI</span>
+                <span class="tag">Excel</span>
+                <span class="tag">Tooltip</span>
+                <span class="tag">Análise pública</span>
+              </div>
+
+              <div class="mini-grid">
+                <div class="mini">
+                  <strong>Problema</strong>
+                  <span>necessidade de análise visual das contratações</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Solução</strong>
+                  <span>tabela analítica com tooltips e visão gráfica complementar</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Impacto</strong>
+                  <span>apoio à aprovação e acompanhamento de valores</span>
+                </div>
+              </div>
+
+              <a class="btn primary" href="https://app.powerbi.com/view?r=eyJrIjoiZWU5ZDJhMWQtMWFkZS00ZmFiLWFkYWUtYTliMjliNTdjOGU0IiwidCI6Ijk2MzgxOWY2LWUxYTMtNDkxYy1hMWNjLTUwOTZmOTE0Y2Y0YiJ9" target="_blank">
+                Abrir painel
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reverse">
+            <div class="project-media">
+              <img src="pbi_marketing.png" alt="Painel Marketing" />
+            </div>
+
+            <div class="project-content">
+              <h3>Painel Marketing com Clusterização</h3>
+
+              <p>
+                Projeto analítico com Python, Power BI e KMeans para segmentação
+                de clientes, análise de comportamento, campanhas e fidelidade.
+              </p>
+
+              <div class="tag-row">
+                <span class="tag">Machine Learning</span>
+                <span class="tag">KMeans</span>
+                <span class="tag">Python</span>
+                <span class="tag">Power BI</span>
+                <span class="tag">Marketing Analytics</span>
+              </div>
+
+              <div class="mini-grid">
+                <div class="mini">
+                  <strong>Problema</strong>
+                  <span>entender perfis e potencial de fidelização</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Solução</strong>
+                  <span>segmentação em clusters e dashboards de comportamento</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Impacto</strong>
+                  <span>direcionamento de campanhas e ações personalizadas</span>
+                </div>
+              </div>
+
+              <a class="btn primary" href="https://app.powerbi.com/view?r=eyJrIjoiZjI3Yzc5NmUtMTA0Zi00MDNmLTgyOTItYzc5YzEwNzc4ZTUwIiwidCI6ImM0ZTEzMGM1LTcxODctNDk3Zi05M2JiLTEwZGRhYWYyMDUwYyJ9" target="_blank">
+                Abrir painel
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <img src="pbi_bolsa.png" alt="Painel Bolsa de Valores" />
+            </div>
+
+            <div class="project-content">
+              <h3>Painel Análise Bolsa de Valores</h3>
+
+              <p>
+                Dashboard interativo com dados históricos da NASDAQ, análise de
+                fechamento, volume negociado, variações mensais e narrativa
+                inteligente no Power BI.
+              </p>
+
+              <div class="tag-row">
+                <span class="tag">NASDAQ</span>
+                <span class="tag">Python</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">DAX</span>
+                <span class="tag">Smart Narrative</span>
+              </div>
+
+              <div class="mini-grid">
+                <div class="mini">
+                  <strong>Problema</strong>
+                  <span>facilitar leitura de tendências de ações</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Solução</strong>
+                  <span>filtros dinâmicos, variações e narrativa automática</span>
+                </div>
+
+                <div class="mini">
+                  <strong>Impacto</strong>
+                  <span>análise acessível para comparação de empresas e períodos</span>
+                </div>
+              </div>
+
+              <a class="btn primary" href="https://app.powerbi.com/view?r=eyJrIjoiNDQzYWViZGMtNWUzYS00Y2JjLTkzMGItYWQ1NGY0MTEzNzM0IiwidCI6ImM0ZTEzMGM1LTcxODctNDk3Zi05M2JiLTEwZGRhYWYyMDUwYyJ9" target="_blank">
+                Abrir painel
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="formacao">
+      <div class="container">
+        <div class="section-title">
+          <h2>Formação e certificações</h2>
+          <p>Base acadêmica e cursos complementares que sustentam minha atuação em dados, BI e automação.</p>
+        </div>
+
+        <div class="education-grid">
+          <div class="education-card">
+            <h3>Formação</h3>
+            <p>
+              <strong>Análise e Desenvolvimento de Sistemas</strong><br />
+              Centro Universitário Estácio<br />
+              2022 – 2024
+            </p>
+          </div>
+
+          <div class="education-card">
+            <h3>Certificações e cursos</h3>
+            <ul class="cert-list">
+              <li>IBM Data Analyst Professional Certificate — IBM / Coursera</li>
+              <li>Microsoft Power BI Para Business Intelligence e Data Science — Data Science Academy</li>
+              <li>Linguagem Python para Análise de Dados e Data Science — Data Science Academy</li>
+              <li>Python e MySQL — Curso em Vídeo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contato</h2>
+          <p>Entre em contato ou acesse meus perfis profissionais.</p>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn primary" href="mailto:gabrielalefti@gmail.com">Enviar e-mail</a>
+          <a class="btn" href="https://github.com/GabrielTIAlef" target="_blank">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/gabrielalef/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Gabriel Álef — Portfólio de Dados, BI e Automação</div>
+  </footer>
+</body>
+</html>
