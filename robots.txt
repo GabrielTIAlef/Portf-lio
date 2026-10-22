@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gabrieltialef.github.io/Portf-lio/sitemap.xml
