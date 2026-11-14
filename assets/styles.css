@@ -74,3 +74,7 @@
 .project-screenshot h3{font-size:21px;margin:0 0 18px}
 
 .portrait-screenshot img{width:auto;max-width:100%;margin-inline:auto;object-fit:contain}
+
+.profile-education.education-summary{display:block}
+.education-summary .education-item + .education-item{margin-top:18px;padding-top:16px;border-top:1px solid #e0e6ee}
+.education-summary .small-label{white-space:normal}
