@@ -72,3 +72,5 @@
 .screenshot-card .project-image img{object-fit:cover;object-position:top}
 .project-screenshot img{max-height:540px;object-fit:cover;object-position:top}
 .project-screenshot h3{font-size:21px;margin:0 0 18px}
+
+.portrait-screenshot img{width:auto;max-width:100%;margin-inline:auto;object-fit:contain}
